@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    html,body{height:100%;margin:0;background:#0B1F3B}
+    .wrap{width:1600px;height:400px;display:block}
+    svg{width:100%;height:100%;display:block}
+  </style>
+</head>
+<body>
+  <div class="wrap" id="wrap"></div>
+  <script>
+    // read ?src=... and load that SVG inline (so animation runs in the document)
+    const params = new URLSearchParams(location.search);
+    const src = params.get('src') || '../portfolio/exercises/week4/banner (1).svg';
+    fetch(src).then(r=>r.text()).then(txt=>{
+      document.getElementById('wrap').innerHTML = txt;
+    }).catch(err=>{
+      document.getElementById('wrap').textContent = 'Failed to load SVG: '+err;
+    });
+    // keep playing
+  </script>
+</body>
+</html>

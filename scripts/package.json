@@ -1,0 +1,14 @@
+{
+  "name": "banner-capture",
+  "version": "1.0.0",
+  "description": "Capture animated SVG frames for converting to an animated GIF",
+  "main": "capture-frames.js",
+  "scripts": {
+    "capture": "node capture-frames.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^20.0.0"
+  }
+}

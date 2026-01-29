@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Leeds Social — Demo</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/portfolio/css/main.css">
+
+<style>
+  :root{
+    --sky-blue: #7ec8f5;
+    --magnolia: #F7F3EE;
+    --card-size: 180px;
+    --gap: 16px;
+    --radius: 10px;
+    --shadow: 0 6px 16px rgba(12,20,30,0.12);
+  }
+
+  /* Basic page */
+  html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+  body{background: #ffffff; color:#111; -webkit-font-smoothing:antialiased;}
+
+  /* Header */
+  .hero{
+    background: linear-gradient(180deg,var(--sky-blue), #6fb6ea 60%);
+    padding:40px 20px;
+    text-align:center;
+    border-bottom: 6px solid rgba(0,0,0,0.06);
+  }
+  .hero .skyline{
+    max-width:900px;margin:0 auto 12px; height:84px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hero h1{
+    margin:0;font-family:"IBM Plex Sans", sans-serif;font-weight:600;
+    color:#fff;font-size:28px;letter-spacing:0.6px;
+  }
+
+  /* Page content */
+  .container{max-width:1100px;margin:20px auto;padding:0 18px;}
+  .row{margin:22px 0;position:relative;}
+  .row-label{
+    font-family:"IBM Plex Sans", sans-serif;
+    font-size:14px;color:#333;margin:0 0 8px 8px;
+  }
+
+  /* Carousel wrapper */
+  .carousel-wrap{
+    display:flex;align-items:center;gap:12px;
+  }
+  .carousel{
+    display:flex;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    padding:8px;
+    gap:var(--gap);
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:auto;
+  }
+  .carousel::-webkit-scrollbar{height:10px}
+  .carousel::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.12);border-radius:6px}
+
+  /* Card - flip container */
+  .card{
+    width:var(--card-size);
+    height:var(--card-size);
+    flex:0 0 var(--card-size);
+    perspective:1200px;
+  }
+  .card-inner{
+    position:relative;width:100%;height:100%;
+    transform-style:preserve-3d;
+    transition: transform 550ms cubic-bezier(.2,.9,.2,1);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+  }
+
+  /* front/back */
+  .card-face{
+    position:absolute;inset:0;border-radius:inherit;backface-visibility:hidden;overflow:hidden;
+  }
+  .card-front img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+  .card-back{
+    background:var(--magnolia);transform:rotateY(180deg);padding:14px;box-sizing:border-box;
+    display:flex;flex-direction:column;justify-content:center;align-items:start;
+    font-family:Inter, sans-serif;
+  }
+  .card-back h4{margin:0 0 4px;font-size:15px;font-weight:600;font-family:"IBM Plex Sans",sans-serif}
+  .card-back p{margin:0;font-size:13px;color:#3a3a3a;line-height:1.3}
+
+  /* Hover / focus flips for non-fixed cards */
+  .card:not(.fixed):hover .card-inner,
+  .card:not(.fixed):focus-within .card-inner{
+    transform: rotateY(180deg);
+  }
+
+  /* Make first card fixed: visually stays, others scroll under it */
+  .carousel .card.fixed{
+    position: -webkit-sticky;
+    position: sticky;
+    left: 8px; /* keep some padding from left */
+    z-index: 5;
+  }
+  /* Disable flip for fixed cards */
+  .card.fixed .card-inner{pointer-events:auto; /* but no flip */}
+
+  /* Buttons to scroll */
+  .row .controls{
+    display:flex;flex-direction:column;gap:8px;margin-left:10px;
+  }
+  .btn{
+    background:#fff;border:1px solid rgba(0,0,0,0.08);padding:8px;border-radius:8px;cursor:pointer;
+    box-shadow:0 2px 6px rgba(0,0,0,0.06);
+  }
+  .btn:focus{outline:3px solid rgba(126,200,245,0.4)}
+
+  /* Responsive */
+  @media (max-width:640px){
+    :root{--card-size:140px}
+    .hero h1{font-size:20px}
+  }
+</style>
+</head>
+<body>
+ <header class="site-banner">
+  <img src="banner-_1_.gif" alt="Animated banner">
+  <div class="site-title">Leeds Social</div>
+</header>
+<!-- HEADER (removed legacy hero block) -->
+    <!-- simple skyline svg, decorative -->
+    <svg width="900" height="84" viewBox="0 0 900 84" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+      <rect x="10" y="22" width="50" height="62" rx="2" fill="rgba(255,255,255,0.18)"/>
+      <rect x="80" y="10" width="40" height="74" rx="2" fill="rgba(255,255,255,0.14)"/>
+      <rect x="140" y="4" width="60" height="80" rx="2" fill="rgba(255,255,255,0.12)"/>
+      <rect x="220" y="30" width="32" height="54" rx="2" fill="rgba(255,255,255,0.18)"/>
+      <rect x="276" y="0" width="100" height="84" rx="2" fill="rgba(255,255,255,0.08)"/>
+      <rect x="390" y="16" width="44" height="68" rx="2" fill="rgba(255,255,255,0.16)"/>
+      <rect x="448" y="10" width="56" height="74" rx="2" fill="rgba(255,255,255,0.12)"/>
+    </svg>
+  </div>
+
+  <h1>Leeds Social</h1>
+</header>
+
+<!-- PAGE -->
+<main class="container" role="main">
+
+  <!-- Template for rows -->
+  <section class="row" data-row="cinema">
+    <h2 class="row-label">Cinema</h2>
+
+    <div class="carousel-wrap" aria-hidden="false">
+      <div class="carousel" tabindex="0" aria-label="Cinema cards">
+        <!-- First card — fixed (no hover flip) -->
+        <article class="card fixed" tabindex="-1" aria-hidden="false">
+          <div class="card-inner" aria-hidden="true">
+            <div class="card-face card-front">
+              <img src="https://picsum.photos/seed/c1/400/400" alt="Cinema highlight poster">
+            </div>
+            <div class="card-face card-back">
+              <h4>Now showing</h4>
+              <p>Director: Kirk Jones<br/>Cast: Sample names</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Scrollable cards -->
+        <article class="card" tabindex="0">
+          <div class="card-inner">
+            <div class="card-face card-front">
+              <img src="https://picsum.photos/seed/c2/400/400" alt="Movie 2 poster">
+            </div>
+            <div class="card-face card-back">
+              <h4>Movie Title</h4>
+              <p>Short details and time.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card-inner">
+            <div class="card-face card-front">
+              <img src="https://picsum.photos/seed/c3/400/400" alt="Movie 3 poster">
+            </div>
+            <div class="card-face card-back">
+              <h4>Movie Title</h4>
+              <p>Short details and time.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card-inner">
+            <div class="card-face card-front">
+              <img src="https://picsum.photos/seed/c4/400/400" alt="Movie 4 poster">
+            </div>
+            <div class="card-face card-back">
+              <h4>Movie Title</h4>
+              <p>Short details and time.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card-inner">
+            <div class="card-face card-front">
+              <img src="https://picsum.photos/seed/c5/400/400" alt="Movie 5 poster">
+            </div>
+            <div class="card-face card-back">
+              <h4>Movie Title</h4>
+              <p>Short details and time.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card-inner">
+            <div class="card-face card-front">
+              <img src="https://picsum.photos/seed/c6/400/400" alt="Movie 6 poster">
+            </div>
+            <div class="card-face card-back">
+              <h4>Movie Title</h4>
+              <p>Short details and time.</p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Controls: scroll left / right -->
+      <div class="controls" aria-hidden="true">
+        <button class="btn scroll-left" title="Scroll left">◀</button>
+        <button class="btn scroll-right" title="Scroll right">▶</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLUB row -->
+  <section class="row" data-row="club">
+    <h2 class="row-label">Club</h2>
+    <div class="carousel-wrap">
+      <div class="carousel" tabindex="0" aria-label="Club cards">
+        <article class="card fixed" tabindex="-1">
+          <div class="card-inner">
+            <div class="card-face card-front">
+              <img src="https://picsum.photos/seed/cl1/400/400" alt="Club highlight">
+            </div>
+            <div class="card-face card-back">
+              <h4>Boogaloo</h4>
+              <p>Wednesdays — details</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card-inner">
+            <div class="card-face card-front"><img src="https://picsum.photos/seed/cl2/400/400" alt=""></div>
+            <div class="card-face card-back"><h4>Event</h4><p>Details</p></div>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card-inner">
+            <div class="card-face card-front"><img src="https://picsum.photos/seed/cl3/400/400" alt=""></div>
+            <div class="card-face card-back"><h4>Event</h4><p>Details</p></div>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card-inner">
+            <div class="card-face card-front"><img src="https://picsum.photos/seed/cl4/400/400" alt=""></div>
+            <div class="card-face card-back"><h4>Event</h4><p>Details</p></div>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card-inner">
+            <div class="card-face card-front"><img src="https://picsum.photos/seed/cl5/400/400" alt=""></div>
+            <div class="card-face card-back"><h4>Event</h4><p>Details</p></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="controls" aria-hidden="true">
+        <button class="btn scroll-left">◀</button>
+        <button class="btn scroll-right">▶</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- THEATRE row -->
+  <section class="row" data-row="theatre">
+    <h2 class="row-label">Theatre</h2>
+    <div class="carousel-wrap">
+      <div class="carousel" tabindex="0" aria-label="Theatre cards">
+        <article class="card fixed" tabindex="-1">
+          <div class="card-inner">
+            <div class="card-face card-front"><img src="https://picsum.photos/seed/t1/400/400" alt="Theatre highlight"></div>
+            <div class="card-face card-back"><h4>Theatre Season</h4><p>Nutcracker & more</p></div>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0"><div class="card-inner"><div class="card-face card-front"><img src="https://picsum.photos/seed/t2/400/400" alt=""></div><div class="card-face card-back"><h4>Show</h4><p>Details</p></div></div></article>
+
+        <article class="card" tabindex="0"><div class="card-inner"><div class="card-face card-front"><img src="https://picsum.photos/seed/t3/400/400" alt=""></div><div class="card-face card-back"><h4>Show</h4><p>Details</p></div></div></article>
+
+        <article class="card" tabindex="0"><div class="card-inner"><div class="card-face card-front"><img src="https://picsum.photos/seed/t4/400/400" alt=""></div><div class="card-face card-back"><h4>Show</h4><p>Details</p></div></div></article>
+
+        <article class="card" tabindex="0"><div class="card-inner"><div class="card-face card-front"><img src="https://picsum.photos/seed/t5/400/400" alt=""></div><div class="card-face card-back"><h4>Show</h4><p>Details</p></div></div></article>
+      </div>
+
+      <div class="controls" aria-hidden="true">
+        <button class="btn scroll-left">◀</button>
+        <button class="btn scroll-right">▶</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/*
+  Script responsibilities:
+  - Add keyboard focus flip support (already covered by focus-within in CSS).
+  - Wire up left/right controls to scroll the corresponding carousel by the card width + gap.
+  - Ensure each carousel's first child has class "fixed" (already set in HTML).
+*/
+
+document.querySelectorAll('.row').forEach(row => {
+  const carousel = row.querySelector('.carousel');
+  const leftBtn = row.querySelector('.scroll-left');
+  const rightBtn = row.querySelector('.scroll-right');
+
+  // compute scroll amount (card width + gap)
+  function scrollAmount(){
+    const card = carousel.querySelector('.card');
+    const style = getComputedStyle(document.documentElement);
+    const gap = parseInt(getComputedStyle(carousel).gap) || 16;
+    return (card ? card.getBoundingClientRect().width : 180) + gap;
+  }
+
+  if (leftBtn && rightBtn && carousel) {
+    leftBtn.addEventListener('click', ()=> carousel.scrollBy({left: -scrollAmount(), behavior: 'smooth'}));
+    rightBtn.addEventListener('click', ()=> carousel.scrollBy({left: scrollAmount(), behavior: 'smooth'}));
+  }
+
+  // keyboard: allow arrow keys to scroll a focused carousel
+  carousel.addEventListener('keydown', (e)=>{
+    if (e.key === 'ArrowRight') { carousel.scrollBy({left: scrollAmount(), behavior:'smooth'}); e.preventDefault(); }
+    if (e.key === 'ArrowLeft')  { carousel.scrollBy({left: -scrollAmount(), behavior:'smooth'}); e.preventDefault(); }
+  });
+
+  // Ensure first child is fixed and does not flip (if dynamic content were added)
+  const first = carousel.querySelector('.card:first-child');
+  if (first && !first.classList.contains('fixed')) {
+    first.classList.add('fixed');
+    // ensure it is not tabbable
+    first.setAttribute('tabindex', '-1');
+  }
+});
+</script>
+
+</body>
+</html>

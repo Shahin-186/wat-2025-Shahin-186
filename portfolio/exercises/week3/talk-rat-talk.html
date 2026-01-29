@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talk Rat Talk</title>
+    <link href="https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mouse+Memoirs&family=Fredoka:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: hwb(66 45% 9%);
+        }
+        header {
+            background: hwb(66 45% 9%);
+            color: #333;
+            padding: 50px 0 18px 0;
+            text-align: center;
+            font-size: 3.5em;
+            letter-spacing: 2px;
+        }
+        nav {
+            background: #70a52a77;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px 0;
+        }
+        nav button {
+            background: #231a13;
+            color: #fff;
+            border: none;
+            margin: 0 10px;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        nav button:hover {
+            background: #fff;
+            color: #231a13;
+        }
+        .container {
+            display: flex;
+            flex-direction: row-reverse;
+            margin-top: 30px;
+            min-height: 60vh;
+        }
+        .side-box {
+            width: 220px;
+            background: #eaeaea;
+            border-radius: 16px;
+            padding: 22px 18px;
+            margin-left: 30px;
+            margin-top: auto;
+            margin-bottom: 30px;
+            height: fit-content;
+            align-self: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            font-family: 'Henny Penny', cursive;
+            font-size: 1.15em;
+            color: #333;
+        }
+        main {
+            flex: 1;
+            margin-left: 60px;
+            margin-right: 30px;
+            background: none;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+        }
+        main h2 {
+            margin-top: 0;
+            color: #444;
+            font-size: 2em;
+        }
+        .sections-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 0.8fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 4px;
+            margin-top: 24px;
+        }
+        .section {
+            background: #f9f6f2;
+            min-height: 220px;
+            width: 85%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            border-radius: 32px;
+            box-shadow: none;
+            font-size: 1em;
+            color: #333;
+            border: 2px solid #111;
+            padding: 18px 18px 18px 18px;
+        }
+        .section strong {
+            font-size: 1.25em;
+            margin-bottom: 6px;
+            font-family: 'Mouse Memoirs', sans-serif;
+            font-weight: bold;
+            display: block;
+            text-align: center;
+        }
+        }
+        .section strong {
+            font-size: 1.25em;
+            margin-bottom: 6px;
+            font-family: 'Mouse Memoirs', sans-serif;
+            font-weight: bold;
+            display: block;
+            text-align: left;
+        }
+        .section ul {
+            font-size: 0.8em;
+            font-family: 'Fredoka', sans-serif;
+            margin-top: 8px;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 12px 0 8px 0;
+            font-size: 1.1em;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            margin-top: 0;
+            z-index: 100;
+        }
+        .footer-content {
+            display: inline-block;
+        }
+        .footer-content span {
+            margin: 0 12px;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header style="position:relative;">
+    <span style="font-family:'Mouse Memoirs',sans-serif;">Talk Rat Talk</span>
+    <span style="position:absolute; bottom:8px; right:18px; font-family:'Henny Penny',cursive; font-size:0.2em; color:#111; ; padding:2px 8px; border-radius:3px;">Cheesin' through life one nibble at a time</span>
+    </header>
+    <nav>
+        <button>Rattus Adventures</button>
+        <button>Nibbles and leafs</button>
+        <button>Tail End Stories</button>
+        <button>Cat Napped</button>
+    </nav>
+    <div class="container">
+        <main>
+            <h2 style="font-family:'Mouse Memoirs',sans-serif;">Rat-ified means I squeaked approval</h2>
+            <div class="sections-grid">
+                <div class="section">
+                    <strong>Rattus Adventures</strong>
+                    <div class="section-image" style="width:100%;text-align:center;margin-bottom:8px;">
+                        <img src="pet_rat.png" alt="Rattus Adventures Image" style="max-width:80px;max-height:80px;border-radius:50%;object-fit:cover;" />
+                    </div>
+                    <div style="text-align:center; font-size:0.95em; margin-bottom:8px;">Rats and their adventures in the great indoors!</div>
+                    <ul style="margin-top:6px; text-align:left;">
+                        <li>Exploring new cardboard box castles</li>
+                        <li>Mastering the art of the midnight snack raid</li>
+                        <li>Building epic tunnels in the couch cushions</li>
+                        <li>Hosting secret dance parties when humans aren't looking</li>
+                        <li>Perfecting the "puppy dog eyes" for extra treats</li>
+                        <li>Training for the Rat Olympics: Synchronized swimming in the water bowl</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <strong>Nibbles and Leafs</strong>
+                    <div class="section-image" style="width:100%;text-align:center;margin-bottom:8px;">
+                        <img src="chef_rat.png" alt="Nibbles and Leafs Image" style="max-width:80px;max-height:80px;border-radius:50%;object-fit:cover;" />
+                    </div>
+                    <div style="text-align:center; font-size:0.95em; margin-bottom:8px;">Creative snacks for the discerning rat!</div>
+                    <ul style="margin-top:6px; text-align:left;">
+                        <li>Cheese platter with a side of adventure</li>
+                        <li>Gourmet seed mix with a hint of mystery</li>
+                        <li>Fresh veggies from the garden (with a dash of mischief)</li>
+                        <li>Miniature fruit salad for the sweet tooth</li>
+                        <li>Homemade ratatouille (rat-style)</li>
+                        <li>Chocolate-covered sunflower seeds (for special occasions)</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <strong>Tail End Stories</strong>
+                    <div class="section-image" style="width:100%;text-align:center;margin-bottom:8px;">
+                        <img src="elf_rat.png" alt="Tail End Stories Image" style="max-width:80px;max-height:80px;border-radius:50%;object-fit:cover;" />
+                    </div>
+                    <div style="text-align:center; font-size:0.95em; margin-bottom:8px;">Fashionista Rats: Always in Style!</div>
+                    <ul style="margin-top:6px; text-align:left;">
+                        <li>Seasonal wardrobe updates: From cozy sweaters to sleek raincoats</li>
+                        <li>Accessorizing with tiny hats and scarves for that extra flair</li>
+                        <li>Strutting the latest trends on the living room runway</li>
+                        <li>DIY fashion projects: Turning old socks into chic outfits</li>
+                        <li>Hosting fashion shows for fellow rat friends</li>
+                        <li>Mixing and matching patterns like a pro</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <strong>Cat Napped</strong>
+                    <div class="section-image" style="width:100%;text-align:center;margin-bottom:8px;">
+                        <img src="cat_alert.png" alt="Cat Napped Image" style="max-width:80px;max-height:80px;border-radius:50%;object-fit:cover;" />
+                    </div>
+                    <div style="text-align:center; font-size:0.95em; margin-bottom:8px;">Latest Warnings: Watch out Kittys out!</div>
+                    <ul style="margin-top:6px; text-align:left;">
+                        <li>Cat on the prowl</li>
+                        <li>Sharp claws are back in action</li>
+                        <li>Stealthy Stalker</li>
+                        <li>Sudden Movements</li>
+                        <li>Unpredictable Behaviour</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+        <div class="side-box" style="display:flex;flex-direction:column;justify-content:center;align-items:center;">
+            <img src="joke_rat.png" alt="Joke Rat" style="max-width:80px;max-height:80px;border-radius:50%;object-fit:cover;margin-bottom:10px;" />
+            <div style="font-size:1.1em; margin-bottom:10px; text-align:center;">Joke of the Day</div>
+            <div style="font-size:0.85em; text-align:center; margin-bottom:8px;">Why did the rat sit on the clock?</div>
+            <div style="font-size:0.85em; text-align:center;"><strong>Because he wanted to be on time!</strong></div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <span>Subscribe</span>
+            <span>Contact us</span>
+        </div>
+    </footer>
+</body>
+</html>

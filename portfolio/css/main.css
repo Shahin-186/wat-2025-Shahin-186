@@ -1,0 +1,603 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gluten:wght@100..900&family=Permanent+Marker&family=Salsa&display=swap');
+
+/* Base styles */
+body {
+    font-family: "Jura", sans-serif;
+    width: 95vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* layout vars for fixed header/footer */
+:root {
+    --header-height: 110px;
+    --footer-height: 64px;
+}
+
+/* ensure header/footer space is reserved so content scrolls between them */
+body {
+    padding-top: var(--header-height);
+    padding-bottom: var(--footer-height);
+}
+/* page-wide skin tone background */
+body {
+    background-color: #f2d1b3; /* skin-tone requested */
+    min-height: 100vh;
+    /* make page full-bleed: take full viewport width */
+    width: 100%;
+    max-width: none;
+    margin: 0;
+}
+
+/* Navbar styles */
+.navbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: #333;
+}
+.navbar li {
+    margin: 0;
+}
+.navbar-left {
+    display: flex;
+}
+.navbar-right,
+.navbar li.navbar-right {
+    margin-left: auto;
+    justify-self: flex-end;
+}
+.navbar a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 1em 2em;
+    transition: background 0.2s;
+}
+.navbar a:hover {
+    background: #555;
+}
+
+/* Site banner */
+.site-banner{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:6px 8px;
+    background: transparent; /* let page background show through */
+    border-bottom:1px solid rgba(255,255,255,0.2);
+}
+.site-banner img {
+  width: 100%;
+  max-height: 300px;   /* limits banner height */
+  object-fit: contain; /* keeps full GIF visible */
+  display: block;
+  margin: 0 auto;
+}
+
+.site-title{
+    font-family: "Montserrat", sans-serif;
+    font-weight:700;
+    font-size:1.4rem;
+    color:#1f2937;
+    margin-left:12px;
+}
+
+
+/* Container and footer */
+.container {
+    background: transparent; /* page background should show through */
+    min-height: 400px;
+    padding: 2em 2em;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--footer-height);
+    text-align: center;
+    padding: 0; /* site-footer will handle inner padding */
+    background: transparent; /* allow the page color to continue */
+    color: #333;
+    z-index: 999;
+}
+
+/* adjust the visible footer text block to sit centered within the fixed footer */
+.site-footer {
+    display: inline-block;
+    line-height: var(--footer-height);
+    padding: 0 1rem;
+}
+
+/* Utility classes */
+.answer_required {
+    font-family: "Montserrat", sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.9em;
+    color: #555;
+}
+.top_message {
+    margin-bottom: 2em;
+}
+
+/* Shared card styles */
+.card {
+    border-radius: 4px;
+    border: 1px solid #dbdbdb;
+    color: #363636;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+.card-header {
+    border-bottom: 1px solid #dbdbdb;
+    border-radius: 4px 4px 0 0;
+    font-weight: 700;
+    padding: 0.75em 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.card-body {
+    padding: 1em 1em;
+    color: #4a4a4a;
+}
+.page-title {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    border-bottom: #222525 2px solid;
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: -0.3em;
+}
+
+/* Page-specific overrides */
+#html .card { background-color: #ebfffc; }
+#html .card-header { background-color: #00d1b2; color: #363636; }
+#css .card { background-color: #ebf9ff; }
+#css .card-header { background-color: #66d1ff; color: #363636; }
+
+#js .card { background-color: #fff5e6; }
+#js .card-header { background-color: #ffb366; color: #363636; }
+
+#http .card { background-color: #fff0f6; }
+#http .card-header { background-color: #ff66a3; color: #363636; }
+
+#dom .card { background-color: #efe3ed; }
+#dom .card-header { background-color: #cc6bd7; color: #363636; }
+/* page-title overrides are applied via classes on the h1 elements where needed */
+
+
+/* Week5 header styles */
+.week5-header {
+    /* fixed header: title left (2/3) and meta at right (1/3) */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: transparent; /* let body skin-tone show */
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    gap: 1rem;
+    z-index: 999;
+}
+
+/* decorative header lines (top and bottom) with a small cut at 2/3 */
+.week5-header {
+    /* header is fixed; keep positioned for decorative backgrounds */
+    position: fixed;
+    /* draw two horizontal segments with a small transparent cut at the 2/3 point
+       using background gradients placed at top and bottom */
+    background-image:
+        linear-gradient(to right, #000 0 calc(66.666% - 8px), transparent calc(66.666% - 8px) calc(66.666% + 8px), #000 calc(66.666% + 8px) 100%),
+        linear-gradient(to right, #000 0 calc(66.666% - 8px), transparent calc(66.666% - 8px) calc(66.666% + 8px), #000 calc(66.666% + 8px) 100%);
+    background-position: top, bottom;
+    background-repeat: no-repeat;
+    background-size: 100% 3px, 100% 3px;
+}
+.week5-title {
+    font-family: 'Permanent Marker', cursive; /* use Permanent Marker as requested */
+    font-size: 2.0rem;
+    margin: 0;
+    color: #1f2937;
+}
+
+.week5-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* start at the left edge of the second column (2/3) */
+    gap: 0.01rem;
+    justify-self: start; /* ensure it sits at the 2/3 column start */
+}
+.week5-meta, .week5-meta .meta-item, .week5-meta .meta-label, .week5-meta .meta-value {
+    font-family: 'Gluten', sans-serif;
+}
+.week5-meta .meta-item {
+    /* show label and value on a single row: label at left, value at right */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.1;
+    width: 100%;
+    position: relative; /* keep relative for the chef-hat pseudo-element */
+    padding-left: 36px; /* room for the chef-hat bullet */
+}
+.meta-label {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #111827;
+}
+
+/* add a chef hat icon before each bold meta label */
+.meta-label::before {
+    /* removed: moved the chef-hat icon to the meta-item level so it behaves like a bullet */
+    content: none;
+}
+/* show chef-hat as a bullet for each meta-item (acts like a list bullet on the right-side header) */
+.week5-meta .meta-item {
+    /* (merged with flex layout above) keep structure for bullet positioning */
+    position: relative;
+    padding-left: 36px; /* room for the chef-hat bullet */
+}
+.week5-meta .meta-item::before {
+    content: "";
+    position: absolute;
+    left: 6px; /* small gutter from the column edge */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-image: url('/portfolio/week5/chef_hat_24dp(1)(1).svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 1;
+}
+.meta-value {
+    font-weight: 400;
+    font-size: 0.85rem; /* slightly smaller */
+    color: #374151;
+    margin-left: 0; /* no negative offset — values sit to the right */
+    text-align: right; /* keep values right-aligned inside the meta column */
+    flex: 0 0 auto; /* let value size naturally; label stays left */
+}
+
+/* Responsive: stack meta under title on small screens */
+@media (max-width: 640px) {
+    /* fallback to stacked layout on small screens */
+    .week5-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .week5-meta {
+        align-items: flex-start;
+        margin-top: 0.5rem;
+        justify-self: auto;
+    }
+}
+
+/* Hero area: image with vertical text on left and right */
+.hero-area {
+    /* contained hero — full-width background, contents centered */
+    width: 100%;
+    padding: 1.5rem 0;
+    background: transparent;
+}
+.hero-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0; /* remove gap so borders can touch */
+    /* full-bleed hero wrapper so image and side columns span the viewport */
+    width: 100vw;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.hero-wrapper {
+    /* nudge the whole hero down a bit so it doesn't touch the fixed header */
+    margin-top: 12px;
+}
+.hero-center {
+    /* center column flexes to take remaining space; image fills it */
+    flex: 1 1 auto;
+    width: auto;
+    height: 420px; /* keep the visual height */
+    overflow: hidden; /* crop overflow so object-fit:cover works */
+    display: block;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    border: 3px solid #000; /* strong border around the picture */
+}
+.hero-center {
+    position: relative; /* for the bottom line pseudo-element */
+}
+.hero-center::after {
+    /* a bolder line that extends beyond the image width so it reads as a stronger divider under the side words */
+    content: "";
+    position: absolute;
+    left: 0; /* align with the image edges now that gaps are removed */
+    right: 0;
+    bottom: -9px;
+    height: 8px;
+    background: #000;
+    z-index: 1;
+}
+.hero-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* stretch and crop to fill the area */
+}
+.hero-side {
+    position: static;
+    width: 48px; /* narrow column reserved for vertical words */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0.25rem;
+    font-family: 'Salsa', cursive; /* use Salsa for the vertical words */
+    font-size: 0.95rem;
+    color: #111827;
+    opacity: 0.95;
+    background: rgba(255,255,255,0.0);
+    z-index: 2; /* keep vertical words on top of the image */
+    border: 2px solid #000; /* border around the vertical word sections */
+    box-sizing: border-box;
+}
+.hero-side {
+    /* make the side columns match the hero height so the vertical words span the whole section */
+    height: 420px;
+}
+.vertical-word {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.vertical-word span { display: block; line-height: 1; }
+.hero-left { order: 0; border-right: none; }
+.hero-right { order: 2; border-left: none; }
+.vertical-word span { display: block; line-height: 1; }
+.vertical-word .spacer { height: 0.6rem; display: block; }
+
+/* Responsive: on small screens stack vertically and hide side columns */
+@media (max-width: 720px) {
+    .hero-wrapper {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    .hero-side { display: none; }
+    .hero-center {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+    }
+}
+
+/* Big boxes in main content: Ingredients and method */
+.big-box {
+    background: #cdec83; /* revert main boxes to white as requested */
+    border-style: solid;
+    border-color: #000; /* black borders per request */
+    border-width: 6px 2px; /* top/bottom thicker than left/right */
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0; /* sharp corners */
+}
+.box-title {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.6rem;
+    margin: 0 0 0.75rem 0;
+    color: #111827;
+    text-align: center; /* center the big-box title */
+}
+.big-box ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+.big-box.method {
+    /* keep method box white like other main boxes */
+    background: #c2fc80b0;
+}
+
+/* Ingredient sub-boxes: two identical rectangular boxes inside Ingredients */
+.ingredients .subboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem; /* reduced gap so ingredient subboxes sit closer (match method) */
+    flex: 1 1 auto; /* allow subboxes to grow so parent big-boxes can match height */
+}
+.big-box.method .subboxes {
+    /* bring the two method subboxes closer while keeping a small separation */
+    gap: 1.2rem;
+}
+.ingredient-subbox {
+    border: 2px solid #000; /* black border */
+    padding: 1rem;
+    border-radius: 0; /* sharp corners */
+    height: 220px; /* exact same height for both */
+    box-sizing: border-box;
+    background: #ffffff;
+    overflow: auto; /* scroll if contents overflow */
+}
+.ingredient-subbox {
+    transition: transform 180ms ease, box-shadow 180ms ease;
+    will-change: transform, box-shadow;
+}
+.ingredient-subbox:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+    z-index: 5;
+}
+.ingredient-subbox .subbox-title {
+    font-weight: 700; /* bold as requested */
+    margin-bottom: 0.5rem;
+    text-align: center; /* center subbox titles */
+    font-family: 'Permanent Marker', cursive; /* subbox titles in Permanent Marker */
+}
+
+@media (min-width: 880px) {
+    /* on wider screens, keep them stacked vertically but can be made side-by-side if needed */
+    .ingredients .subboxes {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 720px) {
+    .ingredient-subbox { height: auto; }
+}
+
+@media (max-width: 720px) {
+    .big-box { padding: 1rem; }
+    .box-title { font-size: 1.4rem; }
+}
+
+/* layout the Ingredients and Method big-boxes side-by-side on wider screens */
+.two-column {
+    display: flex;
+    gap: 0.5rem; /* bring the two big boxes closer together */
+    align-items: stretch; /* make children stretch to same height */
+}
+.two-column .big-box {
+    flex: 1 1 0;
+    margin-bottom: 0; /* spacing handled by gap */
+    display: flex;
+    flex-direction: column; /* allow inner content to stretch */
+}
+
+.two-column .big-box > .subboxes {
+    /* ensure the subboxes area takes remaining space so both big-boxes match height */
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 880px) {
+    .two-column {
+        flex-direction: column;
+    }
+    .two-column .big-box {
+        width: 100%;
+    }
+}
+
+/* Ensure Ingredients and Method boxes use Salsa throughout */
+.two-column .big-box, .two-column .big-box * {
+    font-family: 'Salsa', cursive;
+}
+
+/* Reviews section styles */
+.reviews {
+    /* stretch reviews across the container instead of constraining to 1100px */
+    max-width: none;
+    width: 100vw;
+    margin: 2rem 0;
+    padding: 0 1rem;
+}
+.reviews-title {
+    font-family: 'Salsa', cursive;
+    font-size: 1.6rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.review-text {
+    font-family: 'Gluten', sans-serif;
+    font-size: 1.05rem;
+    margin: 0.6rem 0;
+    color: #111827;
+}
+
+/* Review list using fork+spoon SVG as custom bullet */
+.review-list {
+    list-style: none;
+    margin: 0;
+    padding: 0 0.5rem;
+    width: 100%;
+    max-width: none;
+}
+
+/* Method ordered list: alternate row colours for readability */
+.big-box.method .ingredient-subbox ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.big-box.method .ingredient-subbox ol li {
+    display: block;
+    padding: 0.45rem 0.6rem;
+}
+.big-box.method .ingredient-subbox ol li:nth-child(odd) {
+    background-color: rgba(32, 214, 72, 0.03);
+}
+.big-box.method .ingredient-subbox ol li:nth-child(even) {
+    background-color: rgba(6, 250, 59, 0.06); /* subtle skin-tone tint */
+}
+.review-list li {
+    position: relative;
+    padding-left: 36px; /* space for the icon */
+    margin: 0.6rem 0;
+    font-family: 'Gluten', sans-serif;
+    font-size: 1.05rem;
+    color: #111827;
+    line-height: 1.35;
+}
+.review-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background-image: url('/portfolio/week5/fork_spoon_24dp(1)(1).svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Footer styling: centered text in Salsa */
+.site-footer {
+    text-align: center;
+    font-family: 'Salsa', cursive;
+    padding: 1.5rem 0;
+    margin: 0;
+}
+
+/* thin separator between boxes and reviews */
+.between-boxes-reviews {
+    display: block;
+    width: 100vw;
+    height: 2px;
+    background: #111;
+    border: none;
+    margin: 1.5rem 0;
+}
+
+/* bolder separator between reviews and footer */
+.reviews-footer-sep {
+    display: block;
+    width: 100vw;
+    height: 6px;
+    background: #000;
+    border: none;
+    margin: 1.5rem 0;
+}
+

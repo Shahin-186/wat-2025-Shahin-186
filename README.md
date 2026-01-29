@@ -1,36 +1,33 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/p2vSntpM)
-# WAT-2025
+# Django Project
 
-## Mohammad Shahin
+This is a vanilla Django 5.2.6 starting project created for the WAT-2025 repository.
 
-This repository contains two main folders:
+## Setup
 
-## Portfolio
-A folder for portfolio-related projects and files. 
-Using the following:
+The project is already configured and ready to run. The required dependencies are installed automatically when using the codespace.
+
+## Running the Development Server
+
+To start the Django development server:
+
 ```bash
-   python my_test_web_server.py
+cd "Django Project"
+python manage.py runserver
 ```
-Will run a simple webserver which will set the portfolio directory as root.
 
-## Django Project
-A vanilla Django 5.2.6 starting project ready for development.
+The server will be available at http://localhost:8000 (or the forwarded port in codespaces).
 
-### Quick Start
+## Project Structure
 
-1. Open this repository in a GitHub Codespace (recommended) or local development environment
-2. The Python/Django environment will be automatically configured
-3. Navigate to the Django Project folder and run:
-   ```bash
-   cd "Django Project"
-   python manage.py runserver
-   ```
-4. Access the Django application at the forwarded port (typically port 8000)
+- `manage.py` - Django's command-line utility
+- `myproject/` - Main Django project package
+  - `settings.py` - Django settings
+  - `urls.py` - URL configuration
+  - `wsgi.py` - WSGI configuration for deployment
+  - `asgi.py` - ASGI configuration for async deployment
 
-### Dependencies
+## Database
 
-- Python 3.12
-- Django 5.2.6 (latest version)
-- All dependencies are listed in `requirements.txt`
+The project uses SQLite by default. The database file `db.sqlite3` is created automatically when you run migrations.
 
-The development environment is pre-configured with VS Code extensions for Python and Django development.
+Initial migrations have already been applied.

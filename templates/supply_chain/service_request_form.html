@@ -1,0 +1,19 @@
+{% extends "supply_chain/base.html" %}
+{% load static %}
+
+{% block title %}Service request — The Digital Council{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="title">Service enquiry</h1>
+    <p class="muted">Use the form below to contact the council about a service.</p>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="button is-link" type="submit">Send enquiry</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

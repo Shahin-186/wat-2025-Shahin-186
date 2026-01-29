@@ -1,0 +1,55 @@
+{% extends 'supply_chain/base.html' %}
+{% load static %}
+
+{% block title %}Suppliers — The Digital Council{% endblock %}
+
+{% block content %}
+<section>
+  <div class="card" style="padding:1rem;margin-bottom:1rem">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <h2 style="margin:0">Suppliers</h2>
+      <div>
+        <a class="btn btn-primary" href="{% url 'supplier-create' %}">Add supplier</a>
+        <a class="btn" style="margin-left:0.5rem" href="{% url 'design-home' %}">Home</a>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:0.5rem">List of suppliers. Create, view or edit suppliers.</p>
+  </div>
+
+  {% if suppliers %}
+    <div class="card" style="padding:0;overflow:auto">
+      <table class="table" style="width:100%;margin:0;border-collapse:collapse">
+        <thead style="background:#fafafa">
+          <tr>
+            <th style="padding:0.75rem;text-align:left">Name</th>
+            <th style="padding:0.75rem;text-align:left">Contact person</th>
+            <th style="padding:0.75rem;text-align:left">Email</th>
+            <th style="padding:0.75rem;text-align:left">Phone</th>
+            <th style="padding:0.75rem;text-align:left">Created</th>
+            <th style="padding:0.75rem;text-align:left">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for supplier in suppliers %}
+          <tr>
+            <td style="padding:0.6rem;border-top:1px solid #f2f2f2"><a href="{% url 'supplier-detail' supplier.pk %}">{{ supplier.name }}</a></td>
+            <td style="padding:0.6rem;border-top:1px solid #f2f2f2">{{ supplier.contact_person }}</td>
+            <td style="padding:0.6rem;border-top:1px solid #f2f2f2">{{ supplier.contact_email }}</td>
+            <td style="padding:0.6rem;border-top:1px solid #f2f2f2">{{ supplier.phone }}</td>
+            <td style="padding:0.6rem;border-top:1px solid #f2f2f2">{{ supplier.created_at|date:"Y-m-d" }}</td>
+            <td style="padding:0.6rem;border-top:1px solid #f2f2f2">
+              <a class="btn" href="{% url 'supplier-detail' supplier.pk %}">View</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="card" style="padding:1rem">
+      <p class="muted">No suppliers found.</p>
+    </div>
+  {% endif %}
+</section>
+
+{% endblock %}

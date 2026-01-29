@@ -1,0 +1,42 @@
+{% extends "supply_chain/base.html" %}
+{% load static %}
+
+{% block title %}Taxation & Rates — The Digital Council{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="title">Taxation &amp; Rates</h1>
+    <p class="muted">Information about council tax, business rates and online payments.</p>
+
+    <h2 class="subtitle clean-heading">Typical charges</h2>
+    <ul class="clean-list">
+      <li>Average Band A council tax (example): £1,100 / year</li>
+      <li>Average Band D council tax (example): £1,800 / year</li>
+      <li>Business rates: varies by property valuation; small business relief may apply</li>
+    </ul>
+
+    <h2 class="subtitle">Paying online</h2>
+    <p class="muted">Use the contact page to request a payment link, or visit your online account. For help, contact the rates office.</p>
+
+    <div style="margin-top:1rem">
+      <p><a href="{% url 'contact' %}">Contact the rates office</a> · <a href="{% url 'projects-list' %}">View capital projects</a></p>
+    </div>
+
+    <p><a class="button is-light" href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">Download guidance (PDF)</a></p>
+
+    <h2 class="subtitle">Request more information</h2>
+    <form method="post" action="{% url 'service-request' %}">
+      {% csrf_token %}
+      <input type="hidden" name="service" value="Taxation &amp; Rates">
+      {{ form.name }}<br>
+      {{ form.email }}<br>
+      {{ form.message }}
+      <div style="margin-top:0.6rem">
+        <button class="button is-primary" type="submit">Send request</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

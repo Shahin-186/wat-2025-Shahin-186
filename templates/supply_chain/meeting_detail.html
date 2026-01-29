@@ -1,0 +1,36 @@
+{% extends "supply_chain/base.html" %}
+{% load static %}
+
+{% block title %}{{ meeting.council.name }} Meeting — The Digital Council{% endblock %}
+
+{% block content %}
+<section class="container">
+  <article class="content" style="max-width:800px;margin:0 auto">
+    <h2>Council Meeting</h2>
+    <p class="subtitle is-5 muted">
+      {% if meeting.council %}{{ meeting.council.name }}{% else %}Council{% endif %}
+    </p>
+    
+    <div class="box" style="margin-top:1.5rem">
+      <p><strong>Date:</strong> {{ meeting.date|date:"l, j F Y" }}</p>
+      {% if meeting.time %}
+        <p><strong>Time:</strong> {{ meeting.time|time:"H:i" }}</p>
+      {% endif %}
+      {% if meeting.location %}
+        <p><strong>Location:</strong> {{ meeting.location }}</p>
+      {% endif %}
+    </div>
+
+    <h3 style="margin-top:2rem">Agenda</h3>
+    <div style="background:#f9f9f9;padding:1.5rem;border-radius:8px;margin-top:1rem">
+      {{ meeting.agenda|linebreaks }}
+    </div>
+
+    {% if meeting.council %}
+      <p style="margin-top:2rem">
+        <a href="{% url 'calendar' %}" class="button is-light">Back to Calendar</a>
+      </p>
+    {% endif %}
+  </article>
+</section>
+{% endblock %}

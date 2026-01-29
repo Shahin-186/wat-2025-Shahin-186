@@ -1,0 +1,113 @@
+{% extends 'supply_chain/base.html' %}
+{% load static %}
+
+{% block title %}Contact — The Digital Council{% endblock %}
+
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <h1 class="title" style="font-weight:800; display:inline-block; padding-bottom:0.35rem; border-bottom:3px solid rgba(11,37,64,0.12);">Contact us</h1>
+      <p class="muted"><strong><u>Find a contact number or online form on the relevant web page.</u></strong></p>
+
+      <h2 class="subtitle clean-heading">Report abuse or neglect</h2>
+      <ul class="clean-list">
+        <li>
+          <a href="#" style="font-weight:600">Report a child protection concern</a>
+          <div style="margin-left:1.1rem;color:var(--muted);">If a child is at immediate risk, call <strong>999</strong>. For non‑urgent concerns use the online safeguarding form or phone the safeguarding team.</div>
+        </li>
+        <li>
+          <a href="#" style="font-weight:600">Help for adults being abused or neglected</a>
+          <div style="margin-left:1.1rem;color:var(--muted);">If an adult is at immediate risk, call <strong>999</strong>. For non‑urgent adult safeguarding contact the adult social care team.</div>
+        </li>
+      </ul>
+
+      <h2 class="subtitle clean-heading">Send us a message</h2>
+      <p class="muted">You can send us a message on Facebook or Twitter about most enquiries between 9am and 5pm, Monday to Friday. It's usually quicker than phoning.</p>
+      <ul class="clean-list">
+        <li>Facebook: <a href="https://www.facebook.com/TheDigitalCouncil" target="_blank" rel="noopener">/TheDigitalCouncil</a></li>
+        <li>Twitter: <a href="https://twitter.com/TheDigitalCouncil_Help" target="_blank" rel="noopener">@TheDigitalCouncil_Help</a></li>
+      </ul>
+
+      <h2 class="subtitle clean-heading">Phone us</h2>
+      <ul class="clean-list">
+        <li><strong>Before you call:</strong> check whether you can complete your task online to save time.</li>
+        <li><strong>Apply, report or pay online:</strong> use the website to apply, report or pay for services.</li>
+        <li><strong>General number:</strong> <span style="font-size:1.15rem;font-weight:700;">0111 444 5555</span></li>
+        <li class="muted">Lines are open Monday–Friday, 9am–5pm (Wednesdays from 10am).</li>
+      </ul>
+
+      <h2 class="subtitle clean-heading">If you are deaf, have hearing loss or find speaking difficult</h2>
+      <ul class="clean-list">
+        <li class="muted">We offer British Sign Language (BSL) video calls.</li>
+        <li class="muted">Text relay calling is available — request this service when you contact us.</li>
+      </ul>
+
+      <h2 class="subtitle clean-heading">If you do not speak English</h2>
+      <ul class="clean-list">
+        <li class="muted">Ask for an interpreter when you call and we will arrange translation or interpreting support.</li>
+      </ul>
+
+      <h2 class="subtitle clean-heading">Emergencies and out of hours</h2>
+      <ul class="clean-list">
+        <li class="muted">If you are in danger call <strong>999</strong>.</li>
+        <li class="muted">For urgent matters outside office hours phone one of our emergency numbers.</li>
+      </ul>
+
+      <h2 class="subtitle clean-heading">Give us feedback</h2>
+      <ul class="clean-list">
+        <li>You can make a complaint or tell us how our services are doing — <a href="{% url 'contact' %}">Give us your feedback</a>.</li>
+      </ul>
+
+      <hr style="margin:1.5rem 0">
+
+      <h2 class="subtitle">Send a message via the contact form</h2>
+      <div style="max-width:700px;margin-top:0.5rem">
+        <form method="post" novalidate>
+          {% csrf_token %}
+          {% if form.non_field_errors %}
+            <div class="muted" style="color:#b00020">{{ form.non_field_errors }}</div>
+          {% endif %}
+
+          <div style="margin-bottom:0.5rem">
+            {{ form.name.label_tag }}<br>
+            {{ form.name }}
+            {% if form.name.errors %}
+              <div style="color:#b00020">{{ form.name.errors.0 }}</div>
+            {% endif %}
+          </div>
+
+          <div style="margin-bottom:0.5rem">
+            {{ form.email.label_tag }}<br>
+            {{ form.email }}
+            {% if form.email.errors %}
+              <div style="color:#b00020">{{ form.email.errors.0 }}</div>
+            {% endif %}
+          </div>
+
+          <div style="margin-bottom:0.5rem">
+            {{ form.message.label_tag }}<br>
+            {{ form.message }}
+            {% if form.message.errors %}
+              <div style="color:#b00020">{{ form.message.errors.0 }}</div>
+            {% endif %}
+          </div>
+
+          <p><button class="btn" type="submit">Send message</button></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Hide the header search on this page when it loads
+    document.addEventListener('DOMContentLoaded', function () {
+      try {
+        var hs = document.querySelector('.header-search');
+        if (hs) hs.classList.add('hidden');
+      } catch (e) {
+        console && console.warn && console.warn('Could not hide header search', e);
+      }
+    });
+  </script>
+
+{% endblock %}

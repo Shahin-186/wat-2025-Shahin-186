@@ -1,0 +1,41 @@
+{% extends "supply_chain/base.html" %}
+{% load static %}
+
+{% block title %}Licenses & Permits — The Digital Council{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="title">Licenses &amp; Permits</h1>
+    <p class="muted">Apply for licences, permits and find guidance on required documents.</p>
+
+    <h2 class="subtitle clean-heading">Common licence fees</h2>
+    <ul class="clean-list">
+      <li>Street trading licence (per year): £120</li>
+      <li>Temporary event notice (per event): £21</li>
+      <li>Taxi driver licence (per year): £240</li>
+    </ul>
+
+    <h2 class="subtitle">How to apply</h2>
+    <p class="muted">Prepare required ID and supporting documents, then apply online or visit the licensing office. Processing times vary (1–6 weeks).</p>
+
+    <div style="margin-top:1rem">
+      <p><a href="{% url 'projects-list' %}">See permit-related projects</a> · <a href="{% url 'contact' %}">Apply / contact licensing</a></p>
+    </div>
+
+    <p><a class="button is-light" href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">Download guidance (PDF)</a></p>
+
+    <h2 class="subtitle">Request more information</h2>
+    <form method="post" action="{% url 'service-request' %}">
+      {% csrf_token %}
+      <input type="hidden" name="service" value="Licenses &amp; Permits">
+      {{ form.name }}<br>
+      {{ form.email }}<br>
+      {{ form.message }}
+      <div style="margin-top:0.6rem">
+        <button class="button is-primary" type="submit">Send request</button>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

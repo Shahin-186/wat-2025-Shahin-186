@@ -1,0 +1,89 @@
+{% extends "supply_chain/base.html" %}
+{% load static humanize %}
+
+{% block title %}Calendar — The Digital Council{% endblock %}
+
+{% block content %}
+<section class="container">
+  <div style="text-align:center;padding:2rem 0 1.5rem">
+    <h1 style="font-size:2.5rem;font-weight:700;margin-bottom:0.5rem;color:#2c3e50">Calendar & Events</h1>
+    <p style="font-size:1.1rem;color:#7f8c8d;max-width:600px;margin:0 auto">Stay informed about upcoming community events, council meetings, and important dates</p>
+  </div>
+
+  <h3 style="margin-top:2rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600;color:#34495e;border-left:4px solid #3273dc;padding-left:1rem">Upcoming Events</h3>
+  {% if events %}
+    {# Featured hero for the first (most important) event #}
+    {# Carousel of first 3 events (simple JS) #}
+    {% with featured_list=events|slice:":3" %}
+      <div id="event-carousel" class="hero-event" style="margin-bottom:1rem;position:relative;overflow:hidden">
+        <div class="carousel-track" style="display:flex;transition:transform 300ms ease;">
+          {% for f in featured_list %}
+            <a href="{% url 'event-detail' f.pk %}" class="carousel-slide" style="min-width:100%;flex:0 0 100%;text-decoration:none;color:inherit;cursor:pointer">
+              <div class="hero-image" style="background-image: url('{% if f.image_file %}{{ f.image_file.url }}{% elif f.image %}{{ f.image }}{% else %}{% static "img/projects/project_13.jpg" %}{% endif %}');height:260px"></div>
+              <div class="hero-body">
+                <h2>{{ f.title }}</h2>
+                <p>{{ f.description }}</p>
+                <p style="margin-top:1rem"><span class="hero-cta">Find out more and plan your visit</span></p>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+        <button id="carousel-prev" aria-label="Previous" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.3);border:0;padding:0.6rem;border-radius:6px;color:#fff;z-index:10">‹</button>
+        <button id="carousel-next" aria-label="Next" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.3);border:0;padding:0.6rem;border-radius:6px;color:#fff;z-index:10">›</button>
+      </div>
+      <script>
+        (function(){
+          const track = document.querySelector('#event-carousel .carousel-track');
+          if(!track) return;
+          const slides = track.children;
+          let idx = 0;
+          const update = ()=> track.style.transform = `translateX(-${idx*100}%)`;
+          document.getElementById('carousel-next').addEventListener('click', ()=>{ idx = (idx+1)%slides.length; update(); });
+          document.getElementById('carousel-prev').addEventListener('click', ()=>{ idx = (idx-1+slides.length)%slides.length; update(); });
+          // autoplay
+          let autoplay = setInterval(()=>{ idx = (idx+1)%slides.length; update(); }, 5000);
+          ['mouseenter','focusin'].forEach(ev=> document.getElementById('event-carousel').addEventListener(ev, ()=> clearInterval(autoplay)));
+        })();
+      </script>
+    {% endwith %}
+
+    <div class="project-grid">
+      {% for ev in events %}
+        <article class="project card">
+          <div class="card-content">
+            <p class="title is-5"><a href="{% url 'event-detail' ev.pk %}">{{ ev.date|date:"j M Y" }}{% if ev.time %} — {{ ev.time|time:"H:i" }}{% endif %} — {{ ev.title }}</a></p>
+            <p class="subtitle is-6 muted">{% if ev.project %}Project: <a href="{% url 'project-detail' ev.project.pk %}">{{ ev.project.title }}</a>{% elif ev.council %}{{ ev.council.name }}{% endif %}{% if ev.location %} &middot; {{ ev.location }}{% endif %}</p>
+            <div class="content">
+              <p class="muted">{{ ev.description|truncatewords:30 }}</p>
+              <p style="margin-top:0.5rem"><a href="{% url 'event-detail' ev.pk %}" class="button is-small is-primary">View details</a></p>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="muted">No events scheduled.</p>
+  {% endif %}
+
+  <h3 style="margin-top:3rem;margin-bottom:1rem;font-size:1.5rem;font-weight:600;color:#34495e;border-left:4px solid #3273dc;padding-left:1rem">Upcoming Council Meetings</h3>
+  {% if meetings %}
+    <div class="project-grid meetings-grid">
+      {% for meet in meetings %}
+        <article class="project card">
+          <div class="card-content">
+            <p class="title is-5"><a href="{% url 'meeting-detail' meet.pk %}">{{ meet.date|date:"j M Y" }}{% if meet.time %} — {{ meet.time|time:"H:i" }}{% endif %} — {% if meet.council %}{{ meet.council.name }}{% else %}Council{% endif %}</a></p>
+            <p class="subtitle is-6 muted">{% if meet.location %}{{ meet.location }}{% endif %}</p>
+            <div class="content">
+              <p class="muted">{{ meet.agenda|truncatewords:30 }}</p>
+              <p style="margin-top:0.5rem"><a href="{% url 'meeting-detail' meet.pk %}" class="button is-small is-primary">View agenda</a></p>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="muted">No upcoming meetings.</p>
+  {% endif %}
+
+</section>
+{% endblock %}

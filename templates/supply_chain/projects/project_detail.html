@@ -1,0 +1,76 @@
+{% extends 'supply_chain/base.html' %}
+{% load static humanize %}
+
+{% block title %}{{ object.title }} — Project{% endblock %}
+
+{% block content %}
+<section>
+  <div class="card" style="padding:1rem">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <h2 style="margin:0">{{ object.title }}</h2>
+      {# Action buttons removed per request #}
+    </div>
+
+    <div style="display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap">
+      <div style="flex:1;min-width:260px">
+        {% if object.main_image %}
+          <figure class="image is-4by3">
+            <img src="{{ object.main_image }}" alt="{{ object.title }}" style="width:100%;height:auto;border-radius:6px;" />
+          </figure>
+        {% elif object.image %}
+          <figure class="image is-4by3">
+            <img src="{{ object.image }}" alt="{{ object.title }}" style="width:100%;height:auto;border-radius:6px;" />
+          </figure>
+        {% else %}
+          <figure class="image is-4by3">
+            <img src="{% static 'img/project-default.svg' %}" alt="{{ object.title }}" style="width:100%;height:auto;border-radius:6px;" />
+          </figure>
+        {% endif %}
+      </div>
+      <div style="flex:2;min-width:260px">
+        <h4>Details</h4>
+        <p class="muted">Council: {{ object.council.name }}</p>
+        <p class="muted">Category: {% if object.category %}{{ object.category.name }}{% else %}—{% endif %}</p>
+        <p class="muted">Budget: {{ object.budget|intcomma }}</p>
+        <p style="margin-top:0.75rem">{{ object.description|linebreaks }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section style="margin-top:1rem">
+  <div class="card" style="padding:1rem">
+    <h3 class="title is-5" style="margin-bottom:0.75rem">Key Suppliers</h3>
+
+    {% if project_suppliers %}
+      <div class="table-container">
+        <table class="table is-fullwidth is-striped is-hoverable">
+          <thead>
+            <tr>
+              <th>Supplier</th>
+              <th>Contract value</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for ps in project_suppliers %}
+              <tr>
+                <td><a href="{% url 'supplier-detail' ps.supplier.pk %}">{{ ps.supplier.name }}</a></td>
+                <td>
+                  {% if ps.contract_value %}
+                    £{{ ps.contract_value|floatformat:2|intcomma }}
+                  {% else %}
+                    n/a
+                  {% endif %}
+                </td>
+                <td class="has-text-right"><a class="button is-small is-link" href="{% url 'supplier-detail' ps.supplier.pk %}">View</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="muted">No suppliers attached to this project.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

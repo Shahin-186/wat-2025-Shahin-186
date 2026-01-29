@@ -1,0 +1,37 @@
+{% extends "supply_chain/base.html" %}
+{% load static %}
+
+{% block title %}{{ project.title }} — Project{% endblock %}
+
+{% block content %}
+<section>
+  <h2>{{ project.title }}</h2>
+
+  {% load static %}
+  <p class="muted">Created: {{ project.created_at|date:"Y-m-d H:i" }} — Updated: {{ project.updated_at|date:"Y-m-d H:i" }}</p>
+
+  <div style="margin-top:0.75rem">
+    {% if project.image %}
+      <img src="{{ project.image }}" alt="{{ project.title }}" style="max-width:100%;height:auto;border-radius:6px;" />
+    {% else %}
+      <img src="{% static 'img/project-default.svg' %}" alt="{{ project.title }}" style="max-width:100%;height:auto;border-radius:6px;" />
+    {% endif %}
+  </div>
+
+  <div style="display:flex;gap:1rem;flex-direction:column;margin-top:1rem">
+    <div>
+      <strong>Council:</strong> {{ project.council.name }}
+    </div>
+    <div>
+      <strong>Budget:</strong> {{ project.budget }}
+    </div>
+    <div style="margin-top:0.75rem">
+      <strong>Description</strong>
+      <p class="muted">{{ project.description }}</p>
+    </div>
+  </div>
+
+  <p style="margin-top:1rem"><a class="btn" href="/projects/">Back to projects</a></p>
+</section>
+
+{% endblock %}

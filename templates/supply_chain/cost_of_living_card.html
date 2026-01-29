@@ -1,0 +1,11 @@
+{% load static %}
+{# A compact hero card promoting help with the cost of living. #}
+<article class="cost-card hero-event card" style="margin-bottom:1rem;overflow:hidden">
+  <a href="{% url 'cost-of-living' %}" class="pressable-link" style="display:block;color:inherit;text-decoration:none">
+    <div class="hero-image" style="background-image: url('{% static "img/Cost-of-Living-1200x300.png" %}'); height:200px; background-size:cover; background-position:center;"></div>
+    <div class="hero-body">
+      <h2>Need help with the cost of living?</h2>
+      <p>Find local support for energy bills, food and housing, plus simple tips to cut weekly costs. Tap to see quick advice and local services.</p>
+    </div>
+  </a>
+</article>

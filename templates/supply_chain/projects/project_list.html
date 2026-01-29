@@ -1,0 +1,66 @@
+{% extends 'supply_chain/base.html' %}
+{% load static humanize %}
+
+{% block title %}Projects — The Digital Council{% endblock %}
+
+{% block content %}
+<section>
+  <div class="card" style="padding:1rem;margin-bottom:1rem">
+    <h2 style="margin:0">Projects</h2>
+  </div>
+
+  {% if projects %}
+    <div class="project-grid" style="margin-top:0.5rem">
+      {% for project in projects %}
+        <article class="project card featured-project">
+          {% if project.main_image %}
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="{{ project.main_image }}" alt="{{ project.title }}">
+              </figure>
+            </div>
+          {% elif project.image %}
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="{{ project.image }}" alt="{{ project.title }}">
+              </figure>
+            </div>
+          {% else %}
+            <div class="card-image">
+              <figure class="image is-4by3">
+                {% static 'img/project-default.svg' as default_img %}
+                <img src="{{ default_img }}" alt="{{ project.title }}">
+              </figure>
+            </div>
+          {% endif %}
+
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <p class="title is-5"><a href="{% url 'project-detail' project.pk %}">{{ project.title }}</a></p>
+                <p class="subtitle is-6 muted">{{ project.council.name }} &middot; {% if project.category %}{{ project.category.name }}{% endif %}</p>
+              </div>
+            </div>
+
+            <div class="content">
+              <p class="muted">{{ project.description|truncatewords:22 }}</p>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.75rem">
+              <div style="font-weight:700;color:var(--brand)">£{{ project.budget|intcomma }}</div>
+              <div>
+                <a class="button is-link is-small" href="{% url 'project-detail' project.pk %}">View</a>
+              </div>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="card" style="padding:1rem">
+      <p class="muted">No projects found.</p>
+    </div>
+  {% endif %}
+</section>
+
+{% endblock %}

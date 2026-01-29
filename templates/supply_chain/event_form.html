@@ -1,0 +1,21 @@
+{% extends "supply_chain/base.html" %}
+
+{% block title %}Add Event — The Digital Council{% endblock %}
+
+{% block content %}
+<section class="container">
+  <h2>Add Event</h2>
+
+  <form method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    <div style="max-width:680px">
+      {{ form.as_p }}
+      <div style="margin-top:0.75rem">
+        <button type="submit" class="button is-link">Create event</button>
+        <a href="{% url 'calendar' %}" class="button">Cancel</a>
+      </div>
+    </div>
+  </form>
+</section>
+
+{% endblock %}

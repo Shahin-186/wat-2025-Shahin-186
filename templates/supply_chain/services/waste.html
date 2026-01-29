@@ -1,0 +1,43 @@
+{% extends "supply_chain/base.html" %}
+{% load static %}
+
+{% block title %}Waste & Recycling — The Digital Council{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="title">Waste &amp; Recycling</h1>
+    <p class="muted">Guidance on recycling collection, hazardous waste disposal and commercial waste permits.</p>
+
+    <h2 class="subtitle clean-heading">Service fees & typical costs</h2>
+    <ul class="clean-list">
+      <li>Wheelie bin replacement: £25</li>
+      <li>Garden waste annual subscription: £45</li>
+      <li>Commercial waste permit (starting): £120 per month</li>
+      <li>Hazardous waste collection: charged per item — call for quote</li>
+    </ul>
+
+    <h2 class="subtitle">How to arrange collection</h2>
+    <p class="muted">Household collections use the published calendar; commercial customers should register for a permit and book collections with licensed contractors.</p>
+
+    <div style="margin-top:1rem">
+      <p><a href="{% url 'supplier-list' %}">Find licensed waste contractors</a> · <a href="{% url 'contact' %}">Request a special collection</a></p>
+    </div>
+
+    <p><a class="button is-light" href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">Download guidance (PDF)</a></p>
+
+    <h2 class="subtitle">Request more information</h2>
+    <form method="post" action="{% url 'service-request' %}">
+      {% csrf_token %}
+      <input type="hidden" name="service" value="Waste &amp; Recycling">
+      {{ form.name }}<br>
+      {{ form.email }}<br>
+      {{ form.message }}
+      <div style="margin-top:0.6rem">
+        <button class="button is-primary" type="submit">Send request</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

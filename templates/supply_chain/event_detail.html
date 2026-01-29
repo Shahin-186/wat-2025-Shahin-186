@@ -1,0 +1,20 @@
+{% extends "supply_chain/base.html" %}
+{% load static %}
+
+{% block title %}{{ event.title }} — The Digital Council{% endblock %}
+
+{% block content %}
+<section class="container">
+  <article class="hero-event">
+    <div class="hero-image" style="background-image: url('{% if event.image_file %}{{ event.image_file.url }}{% elif event.image %}{{ event.image }}{% else %}{% static "img/projects/project_13.jpg" %}{% endif %}');"></div>
+    <div class="hero-body">
+      <h2>{{ event.title }}</h2>
+      <p class="muted">{{ event.date|date:"j M Y" }}{% if event.time %} — {{ event.time|time:"H:i" }}{% endif %} {% if event.location %} — {{ event.location }}{% endif %}</p>
+      <div style="margin-top:0.75rem">{{ event.description|linebreaks }}</div>
+      {% if event.project %}
+        <p style="margin-top:1rem">Related project: <a href="{% url 'project-detail' event.project.pk %}">{{ event.project.title }}</a></p>
+      {% endif %}
+    </div>
+  </article>
+</section>
+{% endblock %}

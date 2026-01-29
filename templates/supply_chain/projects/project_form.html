@@ -1,0 +1,40 @@
+{% extends 'supply_chain/base.html' %}
+
+{% block title %}{{ view.title|default:"Project Form" }}{% endblock %}
+
+{% block content %}
+<section>
+  <div class="card" style="padding:1rem;max-width:760px;margin-bottom:1rem">
+    <h2 style="margin:0">{% if object %}Edit project{% else %}Add project{% endif %}</h2>
+    <p class="muted" style="margin-top:0.5rem">Use the form below to add or update a project.</p>
+  </div>
+
+  <div class="card" style="padding:1rem;max-width:760px">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="alert" style="color:#b00020">{{ form.non_field_errors }}</div>
+      {% endif %}
+
+      {% for field in form %}
+        <div style="margin-bottom:0.75rem">
+          {{ field.label_tag }}<br>
+          {{ field }}
+          {% if field.help_text %}
+            <div class="muted" style="font-size:0.9rem">{{ field.help_text }}</div>
+          {% endif %}
+          {% for error in field.errors %}
+            <div style="color:#b00020">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
+      <p>
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a class="btn" style="margin-left:0.5rem" href="{% url 'projects-list' %}">Cancel</a>
+        <a class="btn" style="margin-left:0.5rem" href="{% url 'design-home' %}">Home</a>
+      </p>
+    </form>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "supply_chain/base.html" %}
+{% load static %}
+
+{% block title %}Planning & Zoning — The Digital Council{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="title">Planning &amp; Zoning</h1>
+    <p class="muted">Information about planning applications, zoning rules and guidance for developers and residents.</p>
+
+    <h2 class="subtitle clean-heading">Common fees & charges</h2>
+    <ul class="clean-list">
+      <li>Household planning application fee: £173</li>
+      <li>Full planning application (major developments): from £462</li>
+      <li>Pre-application advice (per meeting): £120–£450 depending on scale</li>
+    </ul>
+
+    <h2 class="subtitle clean-heading">How to apply</h2>
+    <ol class="clean-list clean-ordered">
+      <li>Prepare your drawings and documentation.</li>
+      <li>Use the online form or contact the planning office.</li>
+      <li>Pay the application fee online or at the council offices.</li>
+    </ol>
+
+    <h2 class="subtitle">Example: small extension</h2>
+    <p class="muted">Typical timescale: 8–12 weeks. Typical fee: £173. You may also need building regulation approval.</p>
+
+    <div style="margin-top:1rem">
+      <p><a href="{% url 'projects-list' %}">View related projects</a> · <a href="{% url 'contact' %}">Contact planning office</a></p>
+    </div>
+
+    <h2 class="subtitle">Request more information</h2>
+    <form method="post" action="{% url 'service-request' %}">
+      {% csrf_token %}
+      <input type="hidden" name="service" value="Planning &amp; Zoning">
+      {{ form.name }}<br>
+      {{ form.email }}<br>
+      {{ form.message }}
+      <div style="margin-top:0.6rem">
+        <button class="button is-primary" type="submit">Send request</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

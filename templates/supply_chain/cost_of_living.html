@@ -1,0 +1,106 @@
+{% extends "supply_chain/base.html" %}
+{% load static %}
+
+{% block title %}Help with the cost of living — The Digital Council{% endblock %}
+
+{% block content %}
+<section class="container">
+  <article class="cost-card hero-event">
+    <div class="hero-image" style="background-image: url('{% static "img/Cost-of-Living-1200x300.png" %}'); height:280px; background-size:cover; background-position:center"></div>
+    <div class="hero-body">
+      <h2>Need help with everyday costs?</h2>
+      <p>Practical local support is available for energy bills, food and housing. This page gives quick tips, where to go for help, and an easy comparison of typical rents so you can plan ahead.</p>
+      <ul style="margin-top:0.5rem">
+        <li><strong>Quick tips</strong> you can try today to save money.</li>
+        <li><strong>Where to get help</strong> locally — food support, energy advice and housing services.</li>
+        <li><strong>Simple rent comparison</strong> to see how areas and supermarkets compare.</li>
+      </ul>
+    </div>
+  </article>
+
+  <div id="details" style="margin-top:1.25rem; display:grid; grid-template-columns: 1fr 1fr; gap:1rem">
+    <section class="card" style="padding:1rem">
+      <h3 class="clean-heading">Cheaper areas to rent — quick guide</h3>
+      <p class="muted">Use this list as a starting point — rents change quickly, so always check current listings and transport links.</p>
+
+      <div style="margin-top:0.75rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.75rem">
+        <div style="background:transparent;padding:0">
+          <p style="margin:0"><strong>Seacroft</strong></p>
+          <p class="muted" style="margin:0.25rem 0 0;font-size:0.95rem">Affordable terraces and flats close to local shops — good for lower weekly costs.</p>
+        </div>
+
+        <div style="background:transparent;padding:0">
+          <p style="margin:0"><strong>Gipton</strong></p>
+          <p class="muted" style="margin:0.25rem 0 0;font-size:0.95rem">Lower rents for 1–2 bedroom flats and convenient bus links into the city.</p>
+        </div>
+
+        <div style="background:transparent;padding:0">
+          <p style="margin:0"><strong>Harehills</strong></p>
+          <p class="muted" style="margin:0.25rem 0 0;font-size:0.95rem">Cheaper options and shared housing (HMOs) popular with students and young workers.</p>
+        </div>
+
+        <div style="background:transparent;padding:0">
+          <p style="margin:0"><strong>Beeston</strong></p>
+          <p class="muted" style="margin:0.25rem 0 0;font-size:0.95rem">Budget-friendly area with good access to south-side employers and amenities.</p>
+        </div>
+
+        <div style="background:transparent;padding:0">
+          <p style="margin:0"><strong>Mottingham</strong></p>
+          <p class="muted" style="margin:0.25rem 0 0;font-size:0.95rem">Small pockets of cheaper housing — compare local listings carefully.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:0.8rem">
+        <p class="muted" style="margin:0 0 0.4rem"><strong>How to use this</strong></p>
+        <ul class="clean-list" style="margin-top:0">
+          <li class="muted">Set alerts on major letting sites and compare multiple listings.</li>
+          <li class="muted">Visit the area at different times of day to check transport and local services.</li>
+          <li class="muted">Contact your local council to ask about housing support and low-cost options.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card" style="padding:1rem">
+      <h3 class="clean-heading">Money-saving supermarkets & tips</h3>
+      <p class="muted">Small changes to shopping and meal planning can make a real difference.</p>
+      <ul class="clean-list" style="margin-top:0.5rem">
+        <li><strong>Aldi</strong> — low prices on fresh and own-brand ranges.</li>
+        <li><strong>Lidl</strong> — strong value and regular promotions.</li>
+        <li><strong>Iceland</strong> — good for value frozen meals and big family packs.</li>
+        <li><strong>Asda</strong> — larger value packs and budget ranges.</li>
+        <li><strong>Local markets</strong> — cheaper fruit and veg on market days.</li>
+      </ul>
+      <p class="muted" style="margin-top:0.6rem">Tip: plan simple meals, buy supermarket own-brands, and cook bigger portions to freeze for later.</p>
+      {% if areas %}
+        <h4 style="margin-top:1rem">Local area comparison</h4>
+        <p class="muted">The table below shows approximate average rents and a simple supermarket price index — use it as a starting point, not a guarantee.</p>
+        <table style="width:100%;border-collapse:collapse;margin-top:0.5rem">
+          <thead>
+            <tr>
+              <th style="text-align:left;padding:0.5rem;border-bottom:1px solid rgba(0,0,0,0.06)">Area</th>
+              <th style="text-align:right;padding:0.5rem;border-bottom:1px solid rgba(0,0,0,0.06)">1BR (£)</th>
+              <th style="text-align:right;padding:0.5rem;border-bottom:1px solid rgba(0,0,0,0.06)">2BR (£)</th>
+              <th style="text-align:right;padding:0.5rem;border-bottom:1px solid rgba(0,0,0,0.06)">Shop index</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for a in areas %}
+              <tr>
+                <td style="padding:0.5rem;border-bottom:1px solid rgba(0,0,0,0.04)">{{ a.area }}</td>
+                <td style="padding:0.5rem;text-align:right;border-bottom:1px solid rgba(0,0,0,0.04)">{{ a.avg_rent_1br_gbp }}</td>
+                <td style="padding:0.5rem;text-align:right;border-bottom:1px solid rgba(0,0,0,0.04)">{{ a.avg_rent_2br_gbp }}</td>
+                <td style="padding:0.5rem;text-align:right;border-bottom:1px solid rgba(0,0,0,0.04)">{{ a.supermarket_index|floatformat:2 }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    </section>
+  </div>
+
+  <div style="margin-top:1rem">
+    <p class="muted">If you need personalised support, contact your council or local community hub — many offer budgeting advice, food bank referrals and help to find lower-cost housing.</p>
+  </div>
+
+</section>
+{% endblock %}

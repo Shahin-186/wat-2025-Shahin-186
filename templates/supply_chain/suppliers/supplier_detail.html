@@ -1,0 +1,25 @@
+{% extends 'supply_chain/base.html' %}
+
+{% block title %}{{ object.name }} — Supplier{% endblock %}
+
+{% block content %}
+<section>
+  <div class="card" style="padding:1rem">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <h2 style="margin:0">{{ object.name }}</h2>
+      {# Action buttons removed per request #}
+    </div>
+
+    <div style="display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap">
+      <div style="flex:1;min-width:220px">
+        <h4>Contact</h4>
+        <p class="muted">{{ object.contact_person }} &nbsp;|&nbsp; {{ object.contact_email }} &nbsp;|&nbsp; {{ object.phone }}</p>
+      </div>
+      <div style="flex:2;min-width:260px">
+        <h4>Address</h4>
+        <p class="muted">{{ object.address|linebreaks }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

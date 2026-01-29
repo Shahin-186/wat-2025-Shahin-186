@@ -1,0 +1,40 @@
+{% extends "supply_chain/base.html" %}
+{% load static %}
+
+{% block title %}About — The Digital Council{% endblock %}
+
+{% block content %}
+  <section class="about-hero">
+    <div class="about-left">
+      <h2 id="about">About this prototype</h2>
+      <p class="muted">This small project demonstrates pages and fixtures for exploring supply chain data in a construction context. It's intentionally minimal and focused on clarity.</p>
+      <p>We use a plain HTML/CSS layout with responsive utilities so it works well on mobile and desktop.</p>
+    </div>
+    <div class="about-right">
+      <img src="https://via.placeholder.com/520x320.png?text=Company+Overview" alt="Company overview">
+    </div>
+  </section>
+
+  <section class="columns" style="margin-top:1rem;">
+    <div class="col">
+      <h3>Mission</h3>
+      <p>Placeholder mission statement describing efficient material delivery and vendor coordination.</p>
+    </div>
+    <div class="col">
+      <h3>Team</h3>
+      <p>Placeholder list of roles: Project Manager, Logistics Lead, Procurement Officer, Site Coordinator.</p>
+    </div>
+  </section>
+
+  <section style="margin-top:1.25rem">
+    <h3>Contact & Offices</h3>
+    <p>Head office, regional offices and sample contact points (placeholder content).</p>
+  </section>
+
+  <section style="margin-top:1rem;">
+    <h3>Where to find data</h3>
+    <p class="muted">Fixtures and model data live in the <code>supply_chain/fixtures</code> and <code>supply_chain/migrations</code> directories. Use the Django admin to inspect entries during development.</p>
+    <p><a class="btn" href="#contact">Contact</a></p>
+  </section>
+
+{% endblock %}

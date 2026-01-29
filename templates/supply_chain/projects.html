@@ -1,0 +1,88 @@
+{% extends "supply_chain/base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Projects — The Digital Council{% endblock %}
+
+{% block content %}
+<section>
+  <h2>Projects</h2>
+  <p class="muted">A collection of prototype projects. Click a title to view details.</p>
+
+  {% if projects %}
+    <div class="project-grid" style="margin-top:1rem;">
+      {% cycle 'img/project1.svg' 'img/project2.svg' 'img/project3.svg' as default_img %}
+      {% for project in projects %}
+        <article class="project card">
+          {% if project.main_image %}
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="{{ project.main_image }}" alt="{{ project.title }}">
+              </figure>
+            </div>
+          {% elif project.image %}
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="{{ project.image }}" alt="{{ project.title }}">
+              </figure>
+            </div>
+          {% else %}
+            {% static default_img as static_default %}
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="{{ static_default }}" alt="{{ project.title }}">
+              </figure>
+            </div>
+          {% endif %}
+
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <p class="title is-5"><a href="{% url 'project-detail' project.pk %}">{{ project.title }}</a></p>
+                <p class="subtitle is-6 muted">Created: {{ project.created_at|date:"Y-m-d" }}</p>
+              </div>
+            </div>
+
+            <div class="content">
+              <p class="muted">{{ project.description|truncatewords:25 }}</p>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="muted">No projects found.</p>
+  {% endif %}
+
+</section>
+
+{% endblock %}
+{% extends 'supply_chain/base.html' %}
+{% block title %}Design — Projects{% endblock %}
+{% block content %}
+  <h2>Projects (static)</h2>
+  <p class="muted">Below are sample project cards with placeholder images — used to demonstrate layout and scrolling.</p>
+  <div class="project-grid">
+    <article class="project">
+      <img src="https://via.placeholder.com/560x320.png?text=Site+Delivery+A" alt="placeholder">
+      <h4>Site Delivery A</h4>
+      <p>Large-scale material deliveries to multiple drops on an active construction site. Placeholder description to show vertical flow.</p>
+    </article>
+    <article class="project">
+      <img src="https://via.placeholder.com/560x320.png?text=Material+Procurement+B" alt="placeholder">
+      <h4>Procurement B</h4>
+      <p>Centralised procurement and supplier coordination for concrete and steel. Placeholder copy for layout testing.</p>
+    </article>
+    <article class="project">
+      <img src="https://via.placeholder.com/560x320.png?text=Logistics+C" alt="placeholder">
+      <h4>Logistics C</h4>
+      <p>Logistics planning and route optimisation for heavy components. Additional placeholder text to lengthen the page.</p>
+    </article>
+    <article class="project">
+      <img src="https://via.placeholder.com/560x320.png?text=Offsite+Fabrication+D" alt="placeholder">
+      <h4>Offsite Fabrication D</h4>
+      <p>Offsite manufacturing coordination and just-in-time delivery scheduling. More placeholder text to ensure scrolling.</p>
+    </article>
+  </div>
+
+{% endblock %}

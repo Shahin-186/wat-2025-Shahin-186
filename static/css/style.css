@@ -1,0 +1,314 @@
+/* Minimal responsive styles for design stage */
+:root{
+  --brand:#0b781b;
+  --muted:#6b7280; /* slightly warmer muted text for readability */
+  --accent:#f59e0b;
+  --nav-bg: #041528; /* deep navy with a warm tint for contrast */
+  --nav-foreground: #ffffff; /* ensure header/nav text is clearly readable */
+  --nav-accent: #89b7ff; /* accent for brand */
+  --link-color: #0a67f4; /* primary link colour */
+  --link-hover: #0747a6; /* hover state for links */
+  --card-bg: #ffffff;
+  --card-border: rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box}
+body{font-family:Inter, Arial, sans-serif;margin:0;color:#222;line-height:1.4}
+.site-main a, a { color: var(--link-color); }
+a:hover, a:focus { color: var(--link-hover); text-decoration:underline; }
+.container{max-width:1100px;margin:0 auto;padding:1rem}
+.site-header{background:var(--nav-bg);color:var(--nav-foreground);}
+.site-header .container{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 1rem}
+.site-header .header-inner{display:flex;align-items:center;justify-content:space-between;width:100%}
+.brand{margin:0;font-size:1.25rem}
+.digital-brand a{color:#ffffff;text-decoration:none;font-weight:800;font-size:1.15rem}
+.brand-logo{height:36px;width:auto;display:block}
+.main-nav a{color:var(--nav-foreground);text-decoration:none;margin-left:1rem;font-weight:600}
+
+/* Header layout specifics */
+.header-left{flex:0 0 auto;display:flex;align-items:center;gap:0.75rem}
+.header-center{flex:1 1 420px;display:flex;align-items:center;justify-content:center}
+.header-right{flex:0 0 auto;display:flex;align-items:center;gap:0.75rem}
+
+/* Screen-reader only helper */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+/* Search input centered */
+.header-search .search-input-wrap{position:relative;width:320px;max-width:46vw;display:flex;align-items:center;gap:0.5rem}
+.header-search .search-input-wrap .search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:rgba(230,240,255,0.85)}
+.header-search input[type="search"]{padding-left:36px;padding-right:88px;border-radius:6px;background:#fff;color:#0b2540;height:36px;border:0;flex:1}
+.header-search input::placeholder{color:#8899a6}
+.search-submit{border-radius:6px;background:rgba(0,0,0,0.8);color:#fff;border:0;padding:0.35rem 0.9rem}
+/* Position the search button inside the input area on the right */
+.header-search .search-input-wrap .search-submit{position:absolute;right:6px;top:50%;transform:translateY(-50%);height:28px;z-index:3;border-radius:0 6px 6px 0;border:1px solid rgba(0,0,0,0.08);background:rgba(0,0,0,0.8);color:#fff;padding:0 0.6rem}
+.header-search .search-input-wrap input{z-index:1;border:1px solid rgba(0,0,0,0.08)}
+
+/* Make the search button visually part of the input */
+.header-search .search-input-wrap .search-submit{box-shadow:none}
+.header-search .search-input-wrap .search-submit:focus{outline:2px solid rgba(11,105,244,0.12)}
+/* Improve focus visibility for keyboard users */
+button:focus, a:focus, input:focus, .dropdown-item:focus { outline: 3px solid rgba(11,105,244,0.18); outline-offset:2px }
+
+/* Adjust button and input in dark theme to blend */
+body.theme-dark .header-search .search-input-wrap input{background:#0b1420;color:var(--nav-foreground);border:1px solid rgba(255,255,255,0.06)}
+body.theme-dark .header-search .search-input-wrap .search-submit{background:rgba(255,255,255,0.06);color:var(--nav-foreground);border:1px solid rgba(255,255,255,0.06)}
+
+/* Helper to hide the header search on pages that request it */
+.header-search.hidden { display: none !important; }
+
+/* Services dropdown */
+.services-button{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--nav-foreground);border-radius:6px;border:1px solid rgba(255,255,255,0.06);padding:0.45rem 0.9rem;font-weight:700;text-decoration:none}
+.services-dropdown .dropdown-menu{position:absolute;right:1rem;top:56px;min-width:220px;background:linear-gradient(180deg, rgba(4,20,36,0.98), rgba(6,50,70,0.98));border-radius:8px;padding:0.5rem;box-shadow:0 8px 24px rgba(0,0,0,0.6);z-index:30}
+.services-dropdown .dropdown-content{display:flex;flex-direction:column;gap:0.25rem;background:transparent;padding:0.25rem;border-radius:6px;box-shadow:none}
+.services-dropdown .dropdown-item{color:#ffffff;padding:0.45rem 0.6rem;border-radius:6px;text-decoration:none;background:transparent}
+.services-dropdown .dropdown-item:hover{background:rgba(255,255,255,0.04);color:#fff}
+
+/* Ensure Bulma default white backgrounds are not applied inside our themed dropdown */
+.services-dropdown .dropdown-menu, .services-dropdown .dropdown-content, .services-dropdown .dropdown-item { background-clip: padding-box }
+
+/* Make dropdown visible but subtle by default (partially open feel) */
+.dropdown.is-active .dropdown-menu{opacity:1;transform:none}
+
+/* Responsive adjustments */
+@media (max-width:800px){
+  .header-center{order:3;width:100%;margin-top:0.5rem}
+  .header-left{order:1}
+  .header-right{order:2}
+  .header-search .search-input-wrap{width:100%}
+}
+.site-footer{background:#f5f5f5;padding:1rem 0;margin-top:2rem}
+.site-main{padding:1.25rem}
+.hero{display:flex;gap:1rem;align-items:center}
+.hero-right img{max-width:100%;height:auto;border-radius:6px}
+.columns{display:flex;gap:1rem;margin-top:1.25rem}
+.col{flex:1;background:#fafafa;padding:1rem;border-radius:6px}
+.project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.project{background:var(--card-bg);padding:0;border-radius:8px;border:1px solid var(--card-border);box-shadow:none;overflow:hidden}
+.project img{width:100%;height:auto;border-radius:0;display:block}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.btn{background:var(--accent);color:#fff;padding:0.5rem 0.75rem;border-radius:4px;text-decoration:none}
+
+.muted{color:var(--muted)}
+
+.about-hero, .hero{display:flex;gap:1rem;align-items:center}
+.about-right img{max-width:100%;height:auto;border-radius:6px}
+
+.project-grid .project h4{margin:0.5rem 0 0.25rem}
+
+/* Project card metadata: council and budget */
+.project-meta{display:flex;justify-content:space-between;align-items:center;margin-top:0.25rem}
+.project-meta .council{font-size:0.9rem;color:var(--muted)}
+.project-meta .budget{background:var(--brand);color:#fff;padding:0.2rem 0.5rem;border-radius:4px;font-weight:600;font-size:0.9rem}
+
+/* Top meta on card: category chip + created date */
+.card-top-meta{display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem}
+.chip{background:#eef6f8;color:var(--brand);padding:0.15rem 0.5rem;border-radius:999px;font-size:0.8rem;font-weight:600}
+.created{font-size:0.85rem;color:var(--muted)}
+
+.left-top{display:flex;gap:0.5rem;align-items:center}
+.location{font-size:0.85rem;color:var(--muted);background:#fff;padding:0.12rem 0.4rem;border-radius:4px;border:1px solid #f0f0f0}
+
+/* Footer area with icons and actions */
+.project-footer{display:none}
+
+/* Responsive stack */
+@media (max-width:800px){
+  .hero{flex-direction:column}
+  .columns{flex-direction:column}
+  .site-header .container{flex-direction:column;align-items:flex-start}
+  .main-nav{margin-top:0.5rem}
+}
+
+/* Additional responsive refinements for mobile
+   - Improve touch targets for the menu
+   - Ensure hero stacks cleanly and images scale
+   - Make project cards fill the width and keep consistent spacing
+*/
+
+/* Make nav links easier to tap and stack on small screens */
+@media (max-width:600px) {
+  .main-nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .main-nav a {
+    display: inline-block;
+    padding: 0.6rem 0.75rem;
+    border-radius: 6px;
+    background: transparent;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+  }
+
+  /* Make header brand and nav separate rows for clarity */
+  .site-header .container { gap: 0.5rem; }
+
+  /* Hero: stack and center content */
+  .hero { align-items: stretch; }
+  .hero-left, .hero-right { width: 100%; }
+  .hero-left { text-align: left; }
+
+  /* Make images scale and project cards full width */
+  .project-grid { grid-template-columns: 1fr; }
+  .project { padding: 0.75rem; }
+}
+/* Theme variables and dark theme overrides */
+body, .site-header, .site-footer { transition: background-color 200ms ease, color 200ms ease }
+
+/* Dark theme: toggle by adding `theme-dark` class to <body> */
+body.theme-dark {
+  --brand: #61d07a;
+  --muted: #9fb0c8;
+  --accent: #ffb86b;
+  --nav-bg: #071022;
+  --nav-foreground: #e6f0ff;
+  --nav-accent: #89b7ff;
+  background: #071022;
+  color: #e6eef8;
+}
+
+/* Theme toggle button */
+.theme-toggle{border-radius:6px;padding:0.35rem 0.6rem;border:0;background:transparent;color:var(--nav-foreground);display:inline-flex;align-items:center;gap:0.5rem}
+.theme-toggle:hover{background:rgba(255,255,255,0.03)}
+.theme-toggle i{width:18px;text-align:center;color:inherit}
+/* Ensure the sun icon is white in dark mode */
+body.theme-dark .theme-toggle i,
+body.theme-dark .theme-toggle .fa-sun { color: #ffffff !important }
+/* Slight background for pressed state to indicate active */
+.theme-toggle[aria-pressed="true"]{background:rgba(255,255,255,0.06)}
+
+/* Small refinements when dark theme active for header */
+.site-header.theme-dark, body.theme-dark .site-header{background:var(--nav-bg);color:var(--nav-foreground)}
+
+/* Dark mode: featured project cards */
+body.theme-dark .project.card{background:#081021;border:1px solid rgba(255,255,255,0.04);color:var(--nav-foreground);box-shadow:0 4px 16px rgba(0,0,0,0.4)}
+body.theme-dark .project.card .card-content .title a{color:var(--nav-foreground)}
+body.theme-dark .project.card .muted{color:var(--muted)}
+body.theme-dark .project.card .button.is-link{background:var(--accent);color:#071022;border:none}
+
+/* When limited by dark mode, show only first 4 projects */
+.project-grid.limited-dark .project:nth-child(n+5){display:none}
+
+
+/* Gentle card improvements for all sizes */
+.project { transition: transform 140ms ease, border-color 140ms ease, background-color 140ms ease; }
+.project:hover { transform: translateY(-4px); border-color: rgba(11,93,120,0.12); }
+
+/* Ensure project images cover the area without distortion */
+.project img { width: 100%; height: 160px; object-fit: cover; display:block }
+
+/* Featured project card styling (used on projects list) */
+.featured-project{border-radius:10px;overflow:hidden;border:0;background:linear-gradient(180deg,#ffffff,#fbfdff);box-shadow:0 10px 30px rgba(2,6,23,0.08);display:flex;flex-direction:column}
+.featured-project .card-image{height:180px;overflow:hidden}
+.featured-project .card-image img{height:100%;width:100%;object-fit:cover}
+.featured-project .card-content{padding:0.9rem}
+.featured-project .title.is-5 a{color:#052a3a;font-weight:800}
+.featured-project .muted{color:var(--muted)}
+.featured-project .button.is-link{background:var(--brand);border:none;color:#fff}
+.featured-project .button.is-light{border:1px solid rgba(2,6,23,0.06);background:#fff;color:#06253a}
+
+/* Grid spacing tweaks for project list view */
+.project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+
+/* Footer polish */
+.site-footer{background:linear-gradient(90deg,#021423,#063a4a);color:rgba(255,255,255,0.9);padding:2rem 1rem;margin-top:2rem}
+.site-footer a{color:rgba(255,255,255,0.95)}
+.site-footer .muted{color:rgba(255,255,255,0.75)}
+.site-footer p{margin:0}
+.site-footer .container{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+.site-footer nav{display:flex;flex-direction:column;gap:0.45rem}
+.site-footer .panel-links{display:flex;gap:1rem;flex-direction:column}
+
+@media (max-width:900px){
+  .site-footer .container{flex-direction:column;align-items:flex-start}
+}
+
+/* Slightly larger tap targets on medium screens */
+@media (min-width:601px) and (max-width:900px) {
+  .main-nav a { padding: 0.5rem 0.6rem; }
+  .project img { height: 180px; }
+}
+
+
+/* Clean list and heading styles used across service and contact pages */
+.clean-heading{font-weight:700;text-decoration:underline;margin-bottom:0.5rem}
+.clean-list{list-style:disc;margin-left:1.1rem;padding-left:0.6rem}
+.clean-list li{font-weight:700;text-decoration:underline;margin-bottom:0.45rem}
+.clean-list li.muted{font-weight:600;text-decoration:none;color:var(--muted)}
+.clean-list.clean-ordered{list-style:decimal}
+.clean-list.clean-ordered li{text-decoration:none}
+
+/* Tagline in the header center */
+.tagline{font-size:0.95rem;color:var(--nav-accent);font-weight:600}
+.digital-brand a{color:#ffffff;text-decoration:none;font-weight:800;font-size:1.15rem}
+.site-header{padding:0.45rem 0}
+.header-inner{gap:0.5rem}
+.services-button{cursor:pointer}
+.services-button i{color:inherit}
+.services-button:hover, .services-button[aria-expanded="true"]{background:rgba(255,255,255,0.03);color:var(--nav-foreground);border-color:rgba(255,255,255,0.12)}
+
+/* Pressable meetings section and link styles */
+.pressable-section{cursor:pointer;border:1px solid var(--card-border);background:var(--card-bg)}
+.pressable-link{display:block;color:inherit;text-decoration:none}
+.pressable-link .project.card{margin:0;border-radius:6px;border:0;padding:0.6rem}
+.pressable-link .project.card:hover{transform:none}
+
+/* Meetings grid: horizontally scrollable list of date cards */
+.meetings-grid{display:flex;gap:0.75rem;overflow-x:auto;padding-bottom:0.25rem}
+.meetings-grid .project{min-width:220px;flex:0 0 auto}
+.meetings-grid::-webkit-scrollbar{height:8px}
+.meetings-grid::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.12);border-radius:6px}
+.meetings-grid .project .card-content{padding:0.75rem}
+
+/* Small visual hint for horizontal scrolling on narrower screens */
+@media (max-width:720px){
+  .meetings-grid::after{content:'Swipe →';font-size:0.9rem;color:var(--muted);padding-left:0.75rem;display:inline-block}
+}
+
+/* Fancy meetings section visuals */
+#meetings.pressable-section{background:linear-gradient(90deg, rgba(4,20,36,0.95), rgba(6,50,70,0.95));padding:1rem;border-radius:10px;color:#fff}
+.meetings-wrapper a{color:inherit}
+.meeting-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:8px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 6px 18px rgba(2,6,23,0.35);}
+.meeting-card .title,.meeting-card .subtitle,.meeting-card .muted{color:#e6f0ff}
+.meeting-badge{width:56px;flex:0 0 56px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.meeting-badge .badge-day{font-size:18px;font-weight:800;background:var(--accent);color:#051024;padding:6px 8px;border-radius:6px}
+.meeting-badge .badge-mon{font-size:11px;margin-top:4px;color:rgba(230,240,255,0.85)}
+.meetings-grid .project:not(:last-child){position:relative}
+.meetings-grid .project:not(:last-child)::after{content:'';position:absolute;right:-12px;top:8%;height:84%;width:1px;background:rgba(255,255,255,0.06);transform:translateX(50%)}
+
+@media (max-width:720px){
+  #meetings.pressable-section{padding:0.6rem}
+  .meeting-badge{width:48px;flex:0 0 48px}
+  .meeting-badge .badge-day{font-size:16px;padding:5px 6px}
+}
+
+/* Simple modal (if we need to add modal later) */
+.modal-lite{position:fixed;left:0;top:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(2,6,12,0.6);z-index:80}
+.modal-lite .modal-content{background:var(--card-bg);padding:1rem;border-radius:8px;max-width:920px;width:94%;box-shadow:0 10px 40px rgba(0,0,0,0.5)}
+
+/* Hero-style event card (similar to attached image) */
+.hero-event{border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(2,6,23,0.25);display:flex;flex-direction:column}
+.hero-event .hero-image{height:220px;background-size:cover;background-position:center}
+.hero-event .hero-body{background:var(--nav-bg);color:var(--nav-foreground);padding:1.25rem}
+.hero-event .hero-body h2{font-size:1.55rem;margin:0 0 0.5rem;font-weight:800}
+.hero-event .hero-body p{color:rgba(230,240,255,0.9);margin:0 0 1rem}
+.hero-event .hero-body .hero-cta{display:inline-block;border:1px solid rgba(255,255,255,0.18);color:var(--nav-foreground);padding:0.6rem 1rem;border-radius:6px;text-decoration:none}
+.hero-event .hero-body .hero-cta:hover{background:rgba(255,255,255,0.03)}
+
+@media (max-width:800px){
+  .hero-event .hero-image{height:140px}
+  .hero-event .hero-body h2{font-size:1.25rem}
+}
+
+/* Cost-of-living specific tweaks (match the attached card) */
+.cost-card .hero-image{height:220px}
+.cost-card .hero-body{padding:1.3rem;background:linear-gradient(180deg,#06253a,#042033);color:#fff}
+.cost-card .hero-body h2{font-size:1.6rem;margin-bottom:0.45rem}
+.cost-card .hero-body p{color:rgba(255,255,255,0.9)}
+.cost-card .hero-cta{border:1px solid rgba(255,255,255,0.18);padding:0.6rem 1rem;border-radius:6px;color:#fff;text-decoration:none;display:inline-block}
+.cost-card .hero-cta:hover{background:rgba(255,255,255,0.03)}
+
+

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" width="220" height="48" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">The Digital Council logo</title>
+  <desc id="logoDesc">A green shield with the letters D C and the text Digital Council</desc>
+  <!-- Shield / monogram -->
+  <g transform="translate(4,4)">
+    <rect x="0" y="0" width="40" height="40" rx="8" fill="#0b781b" />
+    <text x="20" y="26" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="20" fill="#fff" text-anchor="middle">DC</text>
+  </g>
+
+  <!-- Brand text -->
+  <text x="56" y="30" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="18" fill="#06253a">Digital</text>
+  <text x="56" y="42" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="12" fill="#0b781b">Council</text>
+</svg>
